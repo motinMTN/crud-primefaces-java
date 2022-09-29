@@ -7,6 +7,7 @@ package beans;
 import bc.TipoRepuestoFacadeLocal;
 import be.TipoRepuesto;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -47,10 +48,21 @@ public class ManagedBeanTipoRepuesto implements Serializable{
         this.objeto = objeto;
     }
     
-    
-    
     public List<TipoRepuesto> getLista(){
         return tipoRepuestoFacade.findAll();
+    }
+    
+    public void reinstanciar(){
+        this.objeto = new TipoRepuesto();
+    }
+    
+    public void procesar(){
+        if(tipo_accion == 1){
+            //Crear
+            objeto.setFechaRegistro(new Date());
+            
+            tipoRepuestoFacade.create(objeto);
+        }
     }
     
 }
